@@ -61,13 +61,6 @@ public class RacingCars {
         Out.printNextLine();
     }
 
-    @Override
-    public String toString() {
-        return "RacingCars{" +
-                "cars=" + cars.toString() +
-                '}';
-    }
-
     public void printResult() {
         Collections.sort(cars, Collections.reverseOrder());
         StringBuilder builder = new StringBuilder();
@@ -94,6 +87,13 @@ public class RacingCars {
             return ", " + car.getName();
         }
         return car.getName();
+    }
+
+    @Override
+    public String toString() {
+        return "RacingCars{" +
+                "cars=" + cars.toString() +
+                '}';
     }
 
 }
