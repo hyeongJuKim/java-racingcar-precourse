@@ -26,7 +26,7 @@ public class RacingCar implements Comparable<RacingCar>{
 
     private void validLength(String name){
         if(name.length() == 0 || name.length() > 5){
-            throw new IllegalArgumentException(ErrorMessage.getMessageValidNameOnetToFive(name.length()));
+            throw new IllegalArgumentException(ErrorMessage.getMessageValidNameOneToFive());
         }
     }
 
@@ -53,10 +53,6 @@ public class RacingCar implements Comparable<RacingCar>{
         if(isForward(generateRandomNumber())){
             forward();
         }
-    }
-
-    public void printRace() {
-        System.out.println(name +  " : " + raceStatus);
     }
 
     @Override
