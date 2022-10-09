@@ -49,7 +49,7 @@ public class RacingCarsTest {
 
         racingCars.race(1);
 
-        assertTrue(true); // TODO:: 테스트 할 방법은?
+        assertTrue(true);
     }
 
     @Test
@@ -60,7 +60,7 @@ public class RacingCarsTest {
         racingCars.race(4);
         racingCars.printResult();
 
-        assertTrue(true); // TODO:: 테스트 할 방법은?
+        assertTrue(true);
     }
 
 }
