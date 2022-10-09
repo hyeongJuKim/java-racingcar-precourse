@@ -1,8 +1,12 @@
 package racingcar.model;
 
-public class RacingCar {
-    private int forwardCount = 0;
+import camp.nextstep.edu.missionutils.Randoms;
+import racingcar.message.ErrorMessage;
+
+public class RacingCar implements Comparable<RacingCar>{
+    private String GAUGE_BAR = "-";
     private String name;
+    private String raceStatus = "";
 
     public RacingCar(String name) {
         validNull(name);
@@ -16,29 +20,60 @@ public class RacingCar {
 
     private void validNull(String name){
         if(name == null){
-            throw new IllegalArgumentException("[ERROR] 자동차의 이름을 입력해주세요.");
+            throw new IllegalArgumentException(ErrorMessage.getMessage(ErrorMessage.ERR_INPUT_THE_CAR_NAME));
         }
     }
 
     private void validLength(String name){
         if(name.length() == 0 || name.length() > 5){
-            throw new IllegalArgumentException("[ERROR] 자동차의 이름은 1-5자 이어야합니다. 입력한 이름 길이(" + name.length() + ")");
+            throw new IllegalArgumentException(ErrorMessage.getMessageValidNameOnetToFive(name.length()));
         }
     }
 
-    public int getForwardCount() {
-        return forwardCount;
+    public String getRaceStatus(){
+        return raceStatus;
     }
 
-    public int forwardCount() {
-        return this.forwardCount++;
+    public int generateRandomNumber(){
+        return Randoms.pickNumberInRange(0, 9);
+    }
+
+    public boolean isForward(int i) {
+        if (i <= 3){
+            return false;
+        }
+        return true;
+    }
+
+    public void forward(){
+        raceStatus += GAUGE_BAR;
+    }
+
+    public void goRace() {
+        if(isForward(generateRandomNumber())){
+            forward();
+        }
+    }
+
+    public void printRace() {
+        System.out.println(name +  " : " + raceStatus);
     }
 
     @Override
     public String toString() {
         return "RacingCar{" +
-                "forwardCount=" + forwardCount +
+                "raceStatus=" + raceStatus +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(RacingCar car) {
+        if (car.getRaceStatus().length() > getRaceStatus().length()) {
+            return 1;
+        } else if (car.getRaceStatus().length() < getRaceStatus().length()) {
+            return -1;
+        }
+        return 0;
     }
 }
