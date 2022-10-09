@@ -8,15 +8,24 @@ import racingcar.message.Out;
 
 public class RacingCars {
 
-    private String SEPARATOR = ",";
+    private String CAR_NAME_SEPARATOR = ",";
     private List<RacingCar> cars = new ArrayList<>();
 
     public RacingCars(String carNames) {
         validEmpty(carNames);
+        validSplitEmpty(carNames);
 
-        for (String name : carNames.split(SEPARATOR)){
+        for (String name : carNames.split(CAR_NAME_SEPARATOR)){
             validLength(name);
             cars.add(new RacingCar(name));
+
+        }
+    }
+
+    private void validSplitEmpty(String carNames) {
+        String[] split = carNames.split(CAR_NAME_SEPARATOR);
+        if (split.length == 0){
+            throw new IllegalArgumentException(ErrorMessage.ERR_INPUT_THE_CAR_NAME);
         }
     }
 
@@ -26,13 +35,14 @@ public class RacingCars {
 
     private void validEmpty(String name){
         if(name == null || name == ""){
-            throw new IllegalArgumentException(ErrorMessage.getMessageValidNameOnetToFive(name.length()));
+            throw new IllegalArgumentException(ErrorMessage.getMessageValidNameOneToFive());
         }
+
     }
 
     private void validLength(String name){
         if(name.length() == 0 || name.length() > 5){
-            throw new IllegalArgumentException(ErrorMessage.getMessageValidNameOnetToFive(name.length()));
+            throw new IllegalArgumentException(ErrorMessage.getMessageValidNameOneToFive());
         }
     }
 
@@ -46,7 +56,7 @@ public class RacingCars {
     private void oneRace() {
         for (RacingCar car : cars){
             car.goRace();
-            car.printRace();
+            Out.printOneRaceResult(car.getName(), car.getRaceStatus());
         }
         Out.printNextLine();
     }
@@ -59,7 +69,7 @@ public class RacingCars {
     }
 
     public void printResult() {
-        Collections.sort(cars);
+        Collections.sort(cars, Collections.reverseOrder());
         StringBuilder builder = new StringBuilder();
         String winnerStatus = cars.get(0).getRaceStatus();
 
