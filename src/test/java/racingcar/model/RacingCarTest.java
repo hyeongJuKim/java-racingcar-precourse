@@ -44,9 +44,9 @@ public class RacingCarTest {
     @DisplayName("전진 횟수 필드를 가진 자동차 객체를 생성한다.")
     void generateCarForwardCount(){
         RacingCar racingCar = new RacingCar("car1");
-        int forwardCount = racingCar.getForwardCount();
+        String raceStatus = racingCar.getRaceStatus();
 
-        assertThat(forwardCount).isInstanceOf(Integer.class);
+        assertThat(raceStatus).isInstanceOf(String.class);
 
     }
 
@@ -54,9 +54,46 @@ public class RacingCarTest {
     @DisplayName("자동차를 1회 전진한다.")
     void forwardOneCar(){
         RacingCar racingCar = new RacingCar("car1");
-        racingCar.forwardCount();
+        racingCar.forward();
 
-        assertThat(racingCar.getForwardCount()).isEqualTo(1);
+        assertThat(racingCar.getRaceStatus()).isEqualTo("-");
+
+    }
+
+    @Test
+    @DisplayName("0-9 사이의 랜덤 숫자를 생성한다.")
+    void generateRandomNumber(){
+        RacingCar racingCar = new RacingCar("car1");
+        int i = racingCar.generateRandomNumber();
+
+        System.out.println("랜덤값 : " +  i);
+
+        assertThat(i >= 0 && i < 10).isTrue();
+    }
+
+    @Test
+    @DisplayName("숫자가 4 이상이면 전진 카운트를 1 증가한다.")
+    void forwardCRacingCar(){
+        RacingCar racingCar = new RacingCar("car1");
+
+        if(racingCar.isForward(4)){
+            racingCar.forward();
+        }
+
+        assertThat(racingCar.getRaceStatus()).isEqualTo("-");
+
+    }
+
+    @Test
+    @DisplayName("숫자가 3 이하이면 전진 카운트를 증가시키지 않는다.")
+    void stopRacingCar(){
+        RacingCar racingCar = new RacingCar("car1");
+
+        if(racingCar.isForward(3)){
+            racingCar.forward();
+        }
+
+        assertThat(racingCar.getRaceStatus().equals("")).isTrue();
 
     }
 
