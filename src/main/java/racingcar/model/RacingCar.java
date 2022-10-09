@@ -69,10 +69,10 @@ public class RacingCar implements Comparable<RacingCar>{
 
     @Override
     public int compareTo(RacingCar car) {
-        if (car.getRaceStatus().length() > getRaceStatus().length()) {
-            return 1;
-        } else if (car.getRaceStatus().length() < getRaceStatus().length()) {
+        if (car.raceStatus.length() > raceStatus.length()) {
             return -1;
+        } else if (car.raceStatus.length() < raceStatus.length()) {
+            return 1;
         }
         return 0;
     }
