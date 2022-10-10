@@ -8,8 +8,8 @@ import racingcar.message.Out;
 
 public class RacingCars {
 
-    private String CAR_NAME_SEPARATOR = ",";
-    private List<RacingCar> cars = new ArrayList<>();
+    private final String CAR_NAME_SEPARATOR = ",";
+    private final List<RacingCar> cars = new ArrayList<>();
 
     public RacingCars(String carNames) {
         validEmpty(carNames);
